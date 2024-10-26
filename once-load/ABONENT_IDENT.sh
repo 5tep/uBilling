@@ -5,7 +5,7 @@ current_date=$(date +%Y%m%d_%H%M)
 echo "
 SELECT 
     u.login AS ABONENT_ID, 
-    '&' AS REGION_ID, -- Статическое значение региона
+    c.id AS REGION_ID, -- Статическое значение региона
     '' AS IDENT_TYPE, -- Статическое значение идентификационного типа
     p.mobile AS PHONE, -- Поле пустое
     '' AS INTERNAL_NUMBER, -- Поле пустое
@@ -59,16 +59,14 @@ FIELDS TERMINATED BY ';'
 OPTIONALLY ENCLOSED BY ''
 LINES TERMINATED BY '\n'
 FROM 
-    users u
+    address adr, apt ap, build b, street s, city c, users u
 LEFT JOIN 
     phones p ON p.login = u.login
 LEFT JOIN 
     pononu mac ON mac.login = u.login
 LEFT JOIN
 	nethosts net ON net.ip = u.ip
-
-;
-
+WHERE u.login = adr.login AND adr.aptid = ap.id AND b.id = ap.buildid AND s.id = b.streetid AND c.id = s.cityid;
 " > /var/lib/mysql-files/query.sql
 
 # Выполнение завроса в базе данных
