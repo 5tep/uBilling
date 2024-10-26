@@ -34,7 +34,7 @@ SELECT
     '' AS IP_RANGE_END, -- Поле пустое
     u.login AS INTERNAL_ID1, -- Используем ID пользователя как INTERNAL_ID1
     u.login AS INTERNAL_ID2, -- Используем ID пользователя как INTERNAL_ID2
-    '?' AS BEGIN_TIME, -- Дата начала контракта
+    DATE_FORMAT(cd.`date`, '%Y-%m-%d 00:00:00') AS BEGIN_TIME, -- Дата начала контракта
     '2049-12-12 23:59:00' AS END_TIME, -- Статическая дата окончания
     '' AS LINE_OBJECT, -- Поле пустое
     '' AS LINE_CROSS, -- Поле пустое
@@ -66,6 +66,10 @@ LEFT JOIN
     pononu mac ON mac.login = u.login
 LEFT JOIN
 	nethosts net ON net.ip = u.ip
+LEFT JOIN 
+    contracts cn ON cn.login = u.login
+LEFT JOIN 
+    contractdates cd ON cd.contract = cn.contract
 WHERE u.login = adr.login AND adr.aptid = ap.id AND b.id = ap.buildid AND s.id = b.streetid AND c.id = s.cityid;
 " > /var/lib/mysql-files/query.sql
 
