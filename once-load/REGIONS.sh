@@ -4,10 +4,10 @@ current_date=$(date +%Y%m%d_%H%M)
 # Формирование MySQL-запроса с выводом в файл
 echo "
 SELECT 
-    s.id AS ID,
+    c.id AS ID,
     '2022-01-01 00:00:00' AS BEGIN_TIME,  --  дата начала
     '2099-12-31 23:59:59' AS END_TIME,    --  дата окончания
-    s.sityname AS DESCRIPTION,        -- Описание
+    c.cityname AS DESCRIPTION,        -- Описание
     '' AS MCC,                         -- Значение MCC
     '' AS MNC                           -- MNC не указан
 INTO OUTFILE '/var/lib/mysql-files/REGIONS_$current_date.txt'
@@ -15,7 +15,7 @@ FIELDS TERMINATED BY ';'
 OPTIONALLY ENCLOSED BY ''
 LINES TERMINATED BY '\n'
 FROM 
-    sity s
+    city c
 ;
 " > /var/lib/mysql-files/query.sql
 
