@@ -43,7 +43,7 @@ SELECT DISTINCT
     4 AS NETWORK_TYPE, -- Тип сети
     '' AS INTERNAL_ID1, -- Поле пустое
     '' AS INTERNAL_ID2 -- Поле пустое
-INTO OUTFILE '/var/lib/mysql-files/ABONENT_$current_date.txt'
+INTO OUTFILE '/home/boss/COPM/files/ABONENT_$current_date.txt'
 FIELDS TERMINATED BY ';' 
 OPTIONALLY ENCLOSED BY ''
 LINES TERMINATED BY '\n'
@@ -66,8 +66,8 @@ WHERE n.realname != ''
 " > /var/lib/mysql-files/query.sql
 
 # Выполнение завроса в базе данных
-mysql -uuser -ppassword stg < /var/lib/mysql-files/query.sql
+mysql -u root -pghbdtn5235441 stg < /home/boss/COPM/query.sql
 
 # Перенос файлов, подчищаем за собой
-mv -f /var/lib/mysql-files/ABONENT* /home/COPM/files
-rm -f /var/lib/mysql-files/query.sql
+#mv -f /home/boss/COPM/ABONENT* /home/boss/COPM/files
+rm -f /home/boss/COPM/query.sql
