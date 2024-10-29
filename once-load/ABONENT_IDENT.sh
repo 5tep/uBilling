@@ -33,7 +33,7 @@ echo "SELECT
     nw.endip AS IP_RANGE_END, -- Поле пустое
     '' AS INTERNAL_ID1, -- Используем ID пользователя как INTERNAL_ID1
     '' AS INTERNAL_ID2, -- Используем ID пользователя как INTERNAL_ID2
-    DATE_FORMAT(cd.`date`, '%Y-%m-%d 00:00:00') AS BEGIN_TIME, -- Дата начала контракта
+    DATE_FORMAT(cd.date, '%Y-%m-%d 00:00:00') AS BEGIN_TIME, -- Дата начала контракта
     '2049-12-12 23:59:00' AS END_TIME, -- Статическая дата окончания
     '' AS LINE_OBJECT, -- Поле пустое
     '' AS LINE_CROSS, -- Поле пустое
@@ -53,7 +53,7 @@ echo "SELECT
     u.ip AS LOC_IPV4, -- Используем IP пользователя для LOC_IPV4
     '' AS LOC_IPV6, -- Поле пустое
     '' AS LOC_IP_PORT -- Поле пустое
-INTO OUTFILE '/var/lib/mysql-files/ABONENT_IDENT_$current_date.txt'
+INTO OUTFILE '/home/boss/COPM/files/ABONENT_IDENT_$current_date.txt'
 FIELDS TERMINATED BY ';' 
 OPTIONALLY ENCLOSED BY ''
 LINES TERMINATED BY '\n'
@@ -72,11 +72,10 @@ LEFT JOIN
 LEFT JOIN 
     contractdates cd ON cd.contract = cn.contract
 WHERE u.login = adr.login AND adr.aptid = ap.id AND b.id = ap.buildid AND s.id = b.streetid AND c.id = s.cityid;
-" > /var/lib/mysql-files/query.sql
+" > /home/boss/COPM/query.sql
 
 # Выполнение завроса в базе данных
-mysql -u user -ppassword database < /var/lib/mysql-files/query.sql
+mysql -u root -pghbdtn5235441 stg < /home/boss/COPM/query.sql
 
 # Перенос файлов, подчищаем за собой
-mv -f /var/lib/mysql-files/ABONENT_IDENT* /home/COPM/files
 rm -f /var/lib/mysql-files/query.sql
