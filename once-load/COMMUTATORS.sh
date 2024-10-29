@@ -46,18 +46,17 @@ SELECT
     s.location AS UNSTRUCT_INFO,                    -- Пустое значение для дополнительной информации
     '' AS SWITCH_SIGN,                       
     99 AS REGION_ID                        -- Статическое значение для региона
-INTO OUTFILE '/var/lib/mysql-files/COMMUTATORS_$current_date.txt'
+INTO OUTFILE '/home/boss/COPM/files/COMMUTATORS_$current_date.txt'
 FIELDS TERMINATED BY ';' 
 OPTIONALLY ENCLOSED BY ''
 LINES TERMINATED BY '\n'
 FROM 
-    `switches` s, switchmodels sm
+    switches s, switchmodels sm
 WHERE s.modelid = sm.id
-;" > /var/lib/mysql-files/query.sql
+;" > /home/boss/COPM/query.sql
 
 # Выполнение завроса в базе данных
-mysql -u user -ppassword database < /var/lib/mysql-files/query.sql
+mysql -u root -pghbdtn5235441 stg < /home/boss/COPM/query.sql
 
 # Перенос файлов, подчищаем за собой
-mv -f /var/lib/mysql-files/COMMUTATORS_* /home/COPM/files
-rm -f /var/lib/mysql-files/query.sql
+rm -f /home/boss/COPM/query.sql
