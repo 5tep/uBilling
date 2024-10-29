@@ -4,6 +4,28 @@ current_date=$(date +%Y%m%d_%H%M)
 # Формирование MySQL-запроса с выводом в файл
 echo "
 SELECT 
+    'SWITCH_ID', 
+    'BEGIN_TIME',      
+    'END_TIME',        
+    'DESCRIPTION',                    
+    'NETWORK_TYPE',                      
+    'SWITCH_TYPE',                       
+    'ADDRESS_TYPE_ID',                   
+    'ADDRESS_TYPE',                      
+    'ZIP',                                
+    'COUNTRY',        
+    'REGION',             
+    'ZONE',              
+    'CITY',                   
+    'STREET',                     
+    'BUILDING',                        
+    'BUILD_SECT',                    
+    'APARTMENT',                        
+    'UNSTRUCT_INFO',                    
+    'SWITCH_SIGN',                       
+    'REGION_ID'                        
+UNION ALL
+SELECT 
     s.id AS SWITCH_ID, 
     '2024-01-01 00:00:00' AS BEGIN_TIME,      -- Указанная дата начала
     '2099-12-31 23:59:59' AS END_TIME,        -- Указанная дата окончания
