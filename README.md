@@ -14,3 +14,7 @@
 
 
 https://wiki.ubilling.net.ua/doku.php?id=backupalka
+
+1. Убрать NULL
+2. Формат даты
+3. Кодировка
