@@ -35,13 +35,13 @@ SELECT DISTINCT
     s.streetname AS STREET,  -- Название улицы
     b.buildnum AS BUILDING,  -- Номер здания 
     '' AS BUILD_SECT,  -- Секция здания
-    ap.`apt` AS APARTMENT,  -- Номер квартиры
-    CONCAT('г. ', c.`cityname`, ' ул.', u.`address`) AS UNSTRUCT_INFO,  -- Адрес как неструктурированное поле
-    u.`date` AS BEGIN_TIME,  
+    ap.apt AS APARTMENT,  -- Номер квартиры
+    '' AS UNSTRUCT_INFO,  -- Адрес как неструктурированное поле
+    u.date AS BEGIN_TIME,  
     '2099-12-31 23:59:59' AS END_TIME,    -- Фиксированное значение
     '' AS INTERNAL_ID1,   -- Пустое поле
     '' AS INTERNAL_ID2    -- Пустое поле
-INTO OUTFILE '/var/lib/mysql-files/ABONENT_ADDRESS_$current_date.txt'
+INTO OUTFILE '/home/boss/COPM/files/ABONENT_ADDRESS_$current_date.txt'
 FIELDS TERMINATED BY ';' 
 OPTIONALLY ENCLOSED BY ''
 LINES TERMINATED BY '\n'
@@ -52,11 +52,10 @@ WHERE u.login = adr.login
     AND s.id = b.streetid 
     AND c.id = s.cityid
 ;
-" > /var/lib/mysql-files/query.sql
+" > /home/boss/COPM/query.sql
 
 # Выполнение завроса в базе данных
-mysql -u user -ppassword database < /var/lib/mysql-files/query.sql
+mysql -u root -pghbdtn5235441 stg < /home/boss/COPM/query.sql
 
-# Перенос файлов, подчищаем за собой
-mv -f /var/lib/mysql-files/ABONENT_ADDRESS* /home/COPM/files
+# подчищаем за собой
 rm -f /var/lib/mysql-files/query.sql
