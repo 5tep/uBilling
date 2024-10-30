@@ -13,7 +13,7 @@ SELECT
 UNION ALL
 SELECT DISTINCT
     u.login AS ID,
-    c.id AS REGION_ID, -- Статическое значение региона
+    99 AS REGION_ID, -- Статическое значение региона
     DATE_FORMAT(cd.`date`, '%Y-%m-%d 00:00:00')  AS CONTRACT_DATE, -- Преобразование UNIX времени в читаемый формат
     cn.contract AS CONTRACT,
     DATE_FORMAT(cd.`date`, '%Y-%m-%d 00:00:00') AS ACTUAL_FROM, -- Дата заключения контракта
