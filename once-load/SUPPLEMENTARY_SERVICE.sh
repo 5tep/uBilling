@@ -18,18 +18,17 @@ SELECT
     '2049-12-31 23:59:59' AS END_TIME,
     name AS DESCRIPTION,
     99 AS REGION_ID
-INTO OUTFILE '/var/lib/mysql-files/SUPPLEMENTARY_SERVICE_$current_date.txt'
+INTO OUTFILE '/home/boss/COPM/files/SUPPLEMENTARY_SERVICE_$current_date.txt'
 FIELDS TERMINATED BY ';' 
 OPTIONALLY ENCLOSED BY ''
 LINES TERMINATED BY '\n'
 FROM 
     tariffs
 WHERE name != '';
-" > /var/lib/mysql-files/query.sql
+" > /home/boss/COPM/query.sql
 
 # Выполнение завроса в базе данных
-mysql -u asdf -ptD44vTG59d big_nodeny < /var/lib/mysql-files/query.sql
+mysql -u asdf -ptD44vTG59d big_nodeny < /home/boss/COPM/query.sql
 
 # Перенос файлов, подчищаем за собой
-mv -f /var/lib/mysql-files/SUPPLEMENTARY_SERVICE* /home/boss/COPM/files
-rm -f /var/lib/mysql-files/query.sql
+rm -f /home/boss/COPM/query.sql
