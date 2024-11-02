@@ -67,5 +67,4 @@ WHERE n.realname != ''
 mysql -u root -pghbdtn5235441 stg < /home/boss/COPM/query.sql
 
 # Перенос файлов, подчищаем за собой
-#mv -f /home/boss/COPM/ABONENT* /home/boss/COPM/files
 rm -f /home/boss/COPM/query.sql
