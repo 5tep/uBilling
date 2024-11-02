@@ -59,8 +59,6 @@ LEFT JOIN
     realname n ON n.login = u.login
 LEFT JOIN 
     passportdata pd ON pd.login = u.login
---LEFT JOIN
---    mlg_userstates us ON us.login = u.login
 WHERE n.realname != ''
 	AND u.login = adr.login AND adr.aptid = ap.id AND b.id = ap.buildid AND s.id = b.streetid AND c.id = s.cityid;
 " > /var/lib/mysql-files/query.sql
