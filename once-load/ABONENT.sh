@@ -17,7 +17,7 @@ SELECT DISTINCT
     DATE_FORMAT(cd.`date`, '%Y-%m-%d 00:00:00')  AS CONTRACT_DATE, -- Преобразование UNIX времени в читаемый формат
     cn.contract AS CONTRACT,
     DATE_FORMAT(cd.`date`, '%Y-%m-%d 00:00:00') AS ACTUAL_FROM, -- Дата заключения контракта
-    '2099-12-31 23:59:59' AS ACTUAL_TO, -- Статическая дата окончания
+    '2049-12-31 23:59:00' AS ACTUAL_TO, -- Статическая дата окончания
     42 AS ABONENT_TYPE, -- Статическое значение типа абонента физическое лицо (43 -юридическое)
     1 AS NAME_INFO_TYPE, -- Поле пустое
     '' AS FAMILY_NAME, -- Фамилия
@@ -30,7 +30,7 @@ SELECT DISTINCT
     SUBSTRING_INDEX(pd.passportnum, ' ', 1) AS IDENT_CARD_SERIAL, -- Поле серия паспорта
     SUBSTRING_INDEX(pd.passportnum, ' ', -1) AS IDENT_CARD_NUMBER, -- Поле номер паспорта
     pd.passportwho AS IDENT_CARD_DESCRIPTION, -- Поле Кем, когда выдан
-    CONCATE(pd.passportnum , ' ', pd.passportwho) AS IDENT_CARD_UNSTRUCT, -- Документ
+    '' AS IDENT_CARD_UNSTRUCT, -- Документ
     '' AS BANK, -- Статическое значение банка
     '' AS BANK_ACCOUNT, -- Статическое значение банковского счета
     '' AS FULL_NAME, -- Используем FIO как полное имя
@@ -41,8 +41,8 @@ SELECT DISTINCT
     '' AS ATTACH, -- Дата последнего изменения
     '' AS DETACH, -- Статическая дата отсоединения
     4 AS NETWORK_TYPE, -- Тип сети
-    '' AS INTERNAL_ID1, -- Поле пустое
-    '' AS INTERNAL_ID2 -- Поле пустое
+    u.login AS INTERNAL_ID1, -- Поле пустое
+    u.login AS INTERNAL_ID2 -- Поле пустое
 INTO OUTFILE '/home/boss/COPM/files/ABONENT_$current_date.txt'
 FIELDS TERMINATED BY ';' 
 OPTIONALLY ENCLOSED BY ''
