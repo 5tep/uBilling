@@ -18,10 +18,10 @@ SELECT
     99 AS REGION_ID, 
     s.desc AS ID, 
     DATE_FORMAT(cd.date, '%Y-%m-%d 00:00:00') AS BEGIN_TIME, 
-    '2099-12-31 23:59:59' AS END_TIME, 
-    '' AS PARAMETER, 
-    '' AS INTERNAL_ID1, 
-    '' AS INTERNAL_ID2
+    '2049-12-31 23:59:00' AS END_TIME, 
+    nh.option AS PARAMETER, 
+    u.login AS INTERNAL_ID1, 
+    u.login AS INTERNAL_ID2
 INTO OUTFILE '/home/boss/COPM/files/ABONENT_SERVICE_$current_date.txt'
 FIELDS TERMINATED BY ';' 
 OPTIONALLY ENCLOSED BY '\"'
