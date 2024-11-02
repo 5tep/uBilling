@@ -58,4 +58,4 @@ WHERE u.login = adr.login
 mysql -u root -pghbdtn5235441 stg < /home/boss/COPM/query.sql
 
 # подчищаем за собой
-rm -f /home/boss/COPM/files/query.sql
+rm -f /home/boss/COPM/query.sql
