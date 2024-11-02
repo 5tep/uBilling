@@ -24,13 +24,13 @@ SELECT
 UNION ALL
 SELECT DISTINCT 
     u.login AS ABONENT_ID,
-    c.id AS REGION_ID,
+    99 AS REGION_ID,
     0 AS ADDRESS_TYPE_ID,  -- Фиксированное значение
     0 AS ADDRESS_TYPE,     -- Фиксированное значение
     '' AS ZIP,             -- Пустое поле, значение не указано
     'Российская Федерация' AS COUNTRY,  -- Статическое значение для страны
     'Херсонская область' AS REGION,    -- Регион из таблицы улиц
-    c.cityalias AS ZONE,            -- Пустое поле, значение не указано
+    '' AS ZONE,            -- Пустое поле, значение не указано
     c.cityname AS CITY,  -- Статическое значение для города
     s.streetname AS STREET,  -- Название улицы
     b.buildnum AS BUILDING,  -- Номер здания 
@@ -38,9 +38,9 @@ SELECT DISTINCT
     ap.apt AS APARTMENT,  -- Номер квартиры
     '' AS UNSTRUCT_INFO,  -- Адрес как неструктурированное поле
     u.date AS BEGIN_TIME,  
-    '2099-12-31 23:59:59' AS END_TIME,    -- Фиксированное значение
-    '' AS INTERNAL_ID1,   -- Пустое поле
-    '' AS INTERNAL_ID2    -- Пустое поле
+    '2049-12-31 23:59:00' AS END_TIME,    -- Фиксированное значение
+    u.login AS INTERNAL_ID1,   -- Пустое поле
+    u.login AS INTERNAL_ID2    -- Пустое поле
 INTO OUTFILE '/home/boss/COPM/files/ABONENT_ADDRESS_$current_date.txt'
 FIELDS TERMINATED BY ';' 
 OPTIONALLY ENCLOSED BY ''
