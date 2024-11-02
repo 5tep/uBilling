@@ -28,7 +28,7 @@ UNION ALL
 SELECT 
     s.id AS SWITCH_ID, 
     '2024-01-01 00:00:00' AS BEGIN_TIME,      -- Указанная дата начала
-    '2099-12-31 23:59:59' AS END_TIME,        -- Указанная дата окончания
+    '2049-12-31 23:59:00' AS END_TIME,        -- Указанная дата окончания
     s.desc AS DESCRIPTION,                    -- Используем поле name для описания
     4 AS NETWORK_TYPE,                      
     sm.modelname AS SWITCH_TYPE,                       
