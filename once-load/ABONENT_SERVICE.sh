@@ -14,8 +14,8 @@ SELECT
     'INTERNAL_ID2'
 UNION ALL
 SELECT 
-    u.login AS ABONENT_ID, 
-    99 AS REGION_ID, 
+    u.login*1 AS ABONENT_ID, 
+    8 AS REGION_ID, 
     s.desc AS ID, 
     DATE_FORMAT(cd.date, '%Y-%m-%d 00:00:00') AS BEGIN_TIME, 
     '2049-12-31 23:59:00' AS END_TIME, 
