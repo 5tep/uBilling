@@ -14,9 +14,9 @@ UNION ALL
 SELECT DISTINCT
     u.login*1 AS ID,
     8 AS REGION_ID, -- Статическое значение региона
-    DATE_FORMAT(cd.date, '%Y-%m-%d 00:00:00')  AS CONTRACT_DATE, -- Преобразование UNIX времени в читаемый формат
+    COALESCE(DATE_FORMAT(cd.date, '%Y-%m-%d 00:00:00'), '2000-01-01 00:00:00')  AS CONTRACT_DATE, -- Преобразование UNIX времени в читаемый формат
     cn.contract AS CONTRACT,
-    DATE_FORMAT(cd.date, '%Y-%m-%d 00:00:00') AS ACTUAL_FROM, -- Дата заключения контракта
+    COALESCE(DATE_FORMAT(cd.date, '%Y-%m-%d 00:00:00'), '2000-01-01 00:00:00') AS ACTUAL_FROM, -- Дата заключения контракта
     '2049-12-31 23:59:00' AS ACTUAL_TO, -- Статическая дата окончания
     42 AS ABONENT_TYPE, -- Статическое значение типа абонента физическое лицо (43 -юридическое)
     1 AS NAME_INFO_TYPE, -- Поле пустое
@@ -52,14 +52,14 @@ FROM
 LEFT JOIN 
     contracts cn ON cn.login = u.login
 LEFT JOIN 
-    contractdates cd ON cd.contract = cn.contract
+    contractdates cd ON cd.contract = cn.contract 
 LEFT JOIN 
     phones p ON p.login = u.login
 LEFT JOIN 
     realname n ON n.login = u.login
 LEFT JOIN 
     passportdata pd ON pd.login = u.login
-WHERE n.realname != '' AND cd.date != ''
+WHERE n.realname != ''
 	AND u.login = adr.login AND adr.aptid = ap.id AND b.id = ap.buildid AND s.id = b.streetid AND c.id = s.cityid;
 " > /home/boss/COPM/query.sql
 
