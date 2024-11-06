@@ -52,7 +52,7 @@ SELECT
     p.summ AS AMOUNT,
     '' AS AMOUNT_CURRENCY,  -- Пустое поле
     '' AS PHONE_NUMBER,  -- Информация о номере телефона отсутствует в этой таблице
-    u.login AS ACCOUNT,  -- Пример форматирования номера счета
+    u.login*1 AS ACCOUNT,  -- Пример форматирования номера счета
     '' AS INTERNAL_ID1,
     '' AS INTERNAL_ID2,
     '' AS BANK_ACCOUNT,  -- Пустое поле
@@ -70,7 +70,7 @@ SELECT
     '' AS DONATED_INTERNAL_ID2,  -- Пустое поле
     '' AS CARD_NUMBER,  -- Пустое поле
     '' AS PAY_PARAMS,  -- Пустое поле
-    n.realname AS PERSON_RECIEVED,  -- Пустое поле
+    '' AS PERSON_RECIEVED,  -- Пустое поле
     '' AS BANK_DIVISION_NAME,  -- Пустое поле
     '' AS BANK_CARD_ID,  -- Пустое поле
     '' AS ADDRESS_TYPE_ID,  -- Пустое поле
@@ -85,7 +85,7 @@ SELECT
     '' AS BUILD_SECT,  -- Пустое поле
     '' AS APARTMENT,  -- Пустое поле
     '' AS UNSTRUCT_INFO,  -- Пустое поле
-    99 AS REGION_ID  -- Пример статического значения
+    8 AS REGION_ID  -- Пример статического значения
 INTO OUTFILE '/home/boss/COPM/files/PAYMENT_$current_date.txt'
 FIELDS TERMINATED BY ';' 
 OPTIONALLY ENCLOSED BY ''
