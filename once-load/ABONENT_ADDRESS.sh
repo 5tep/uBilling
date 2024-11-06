@@ -23,8 +23,8 @@ SELECT
     'INTERNAL_ID2'
 UNION ALL
 SELECT DISTINCT 
-    u.login AS ABONENT_ID,
-    99 AS REGION_ID,
+    u.login*1 AS ABONENT_ID,
+    8 AS REGION_ID,
     0 AS ADDRESS_TYPE_ID,  -- Фиксированное значение
     0 AS ADDRESS_TYPE,     -- Фиксированное значение
     '' AS ZIP,             -- Пустое поле, значение не указано
@@ -39,8 +39,8 @@ SELECT DISTINCT
     '' AS UNSTRUCT_INFO,  -- Адрес как неструктурированное поле
     u.date AS BEGIN_TIME,  
     '2049-12-31 23:59:00' AS END_TIME,    -- Фиксированное значение
-    u.login AS INTERNAL_ID1,   -- Пустое поле
-    u.login AS INTERNAL_ID2    -- Пустое поле
+    u.login*1 AS INTERNAL_ID1,   -- Пустое поле
+    u.login*1 AS INTERNAL_ID2    -- Пустое поле
 INTO OUTFILE '/home/boss/COPM/files/ABONENT_ADDRESS_$current_date.txt'
 FIELDS TERMINATED BY ';' 
 OPTIONALLY ENCLOSED BY ''
