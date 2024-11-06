@@ -12,8 +12,8 @@ SELECT
     'INTERNAL_ID2'
 UNION ALL
 SELECT DISTINCT
-    u.login AS ID,
-    99 AS REGION_ID, -- Статическое значение региона
+    u.login*1 AS ID,
+    8 AS REGION_ID, -- Статическое значение региона
     DATE_FORMAT(cd.`date`, '%Y-%m-%d 00:00:00')  AS CONTRACT_DATE, -- Преобразование UNIX времени в читаемый формат
     cn.contract AS CONTRACT,
     DATE_FORMAT(cd.`date`, '%Y-%m-%d 00:00:00') AS ACTUAL_FROM, -- Дата заключения контракта
@@ -24,25 +24,25 @@ SELECT DISTINCT
     '' AS GIVEN_NAME, -- Имя
     '' AS INITIAL_NAME, -- Отчество
     n.realname AS UNSTRUCT_NAME, -- Используем FIO как неструктурированное имя
-    pd.birthdate AS BIRTH_DATE, -- Поле Дата рождения
+    COALESCE(pd.birthdate, '') AS BIRTH_DATE, -- Поле Дата рождения
     1 AS IDENT_CARD_TYPE_ID, -- Поле ИД типа документа
     0 AS IDENT_CARD_TYPE, -- Поле Тип документа
-    SUBSTRING_INDEX(pd.passportnum, ' ', 1) AS IDENT_CARD_SERIAL, -- Поле серия паспорта
-    SUBSTRING_INDEX(pd.passportnum, ' ', -1) AS IDENT_CARD_NUMBER, -- Поле номер паспорта
-    pd.passportwho AS IDENT_CARD_DESCRIPTION, -- Поле Кем, когда выдан
+    COALESCE(SUBSTRING_INDEX(pd.passportnum, ' ', 1), '') AS IDENT_CARD_SERIAL, -- Поле серия паспорта
+    COALESCE(SUBSTRING_INDEX(pd.passportnum, ' ', -1), '') AS IDENT_CARD_NUMBER, -- Поле номер паспорта
+    COALESCE(pd.passportwho, '') AS IDENT_CARD_DESCRIPTION, -- Поле Кем, когда выдан
     '' AS IDENT_CARD_UNSTRUCT, -- Документ
     '' AS BANK, -- Статическое значение банка
     '' AS BANK_ACCOUNT, -- Статическое значение банковского счета
     '' AS FULL_NAME, -- Используем FIO как полное имя
     '' AS INN, -- Поле пустое
-    p.mobile AS CONTACT, -- Поле пустое
-    p.phone AS PHONE_FAX, -- Поле пустое
+    '' AS CONTACT, -- Поле пустое
+    '' AS PHONE_FAX, -- Поле пустое
     0 AS STATUS, -- Статус пользователя
     '' AS ATTACH, -- Дата последнего изменения
     '' AS DETACH, -- Статическая дата отсоединения
     4 AS NETWORK_TYPE, -- Тип сети
-    u.login AS INTERNAL_ID1, -- Поле пустое
-    u.login AS INTERNAL_ID2 -- Поле пустое
+    u.login*1 AS INTERNAL_ID1, -- Поле пустое
+    u.login*1 AS INTERNAL_ID2 -- Поле пустое
 INTO OUTFILE '/home/boss/COPM/files/ABONENT_$current_date.txt'
 FIELDS TERMINATED BY ';' 
 OPTIONALLY ENCLOSED BY ''
