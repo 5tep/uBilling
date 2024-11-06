@@ -14,9 +14,9 @@ UNION ALL
 SELECT DISTINCT
     u.login*1 AS ID,
     8 AS REGION_ID, -- Статическое значение региона
-    DATE_FORMAT(cd.`date`, '%Y-%m-%d 00:00:00')  AS CONTRACT_DATE, -- Преобразование UNIX времени в читаемый формат
+    DATE_FORMAT(cd.date, '%Y-%m-%d 00:00:00')  AS CONTRACT_DATE, -- Преобразование UNIX времени в читаемый формат
     cn.contract AS CONTRACT,
-    DATE_FORMAT(cd.`date`, '%Y-%m-%d 00:00:00') AS ACTUAL_FROM, -- Дата заключения контракта
+    DATE_FORMAT(cd.date, '%Y-%m-%d 00:00:00') AS ACTUAL_FROM, -- Дата заключения контракта
     '2049-12-31 23:59:00' AS ACTUAL_TO, -- Статическая дата окончания
     42 AS ABONENT_TYPE, -- Статическое значение типа абонента физическое лицо (43 -юридическое)
     1 AS NAME_INFO_TYPE, -- Поле пустое
@@ -61,7 +61,7 @@ LEFT JOIN
     passportdata pd ON pd.login = u.login
 WHERE n.realname != ''
 	AND u.login = adr.login AND adr.aptid = ap.id AND b.id = ap.buildid AND s.id = b.streetid AND c.id = s.cityid;
-" > /var/lib/mysql-files/query.sql
+" > /home/boss/COPM/query.sql
 
 # Выполнение завроса в базе данных
 mysql -u root -pghbdtn5235441 stg < /home/boss/COPM/query.sql
