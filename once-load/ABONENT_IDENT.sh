@@ -17,7 +17,7 @@ echo "SELECT
     net.mac AS MAC, -- MAC-адрес пользователя, если он есть
     '' AS VPI, -- Поле пустое
     '' AS VCI, -- Поле пустое
-    u.login AS LOGIN, -- Логин пользователя
+    u.login*1 AS LOGIN, -- Логин пользователя
     '' AS E_MAIL, -- Поле пустое
     '' AS PIN, -- Поле пустое
     '' AS USER_DOMAIN, -- Поле пустое
@@ -33,7 +33,7 @@ echo "SELECT
     nw.endip AS IP_RANGE_END, -- Поле пустое
     u.login*1 AS INTERNAL_ID1, -- Используем ID пользователя как INTERNAL_ID1
     u.login*1 AS INTERNAL_ID2, -- Используем ID пользователя как INTERNAL_ID2
-    DATE_FORMAT(cd.date, '%Y-%m-%d 00:00:00') AS BEGIN_TIME, -- Дата начала контракта
+    COALESCE(DATE_FORMAT(cd.date, '%Y-%m-%d 00:00:00'), '2000-01-01 00:00:00') AS BEGIN_TIME, -- Дата начала контракта
     '2049-12-12 23:59:00' AS END_TIME, -- Статическая дата окончания
     '' AS LINE_OBJECT, -- Поле пустое
     '' AS LINE_CROSS, -- Поле пустое
