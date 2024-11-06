@@ -21,7 +21,7 @@ UNION ALL
 SELECT 
     n.desc AS DESCRIPTION, 
     0 AS IP_TYPE,
-    n.desc AS IPV4,
+    HEX(SUBSTRING_INDEX(n.desc, '/', -1)) AS IPV4,
     '' AS IPV6,
     0 AS IP_MASK_TYPE,                      
     'FFFFFF00' AS IPV4_MASK,                       
@@ -34,8 +34,7 @@ FIELDS TERMINATED BY ';'
 OPTIONALLY ENCLOSED BY ''
 LINES TERMINATED BY '\n'
 FROM 
-    switches s, switchmodels sm
-WHERE s.modelid = sm.id
+    networks n
 ;" > /home/boss/COPM/query.sql
 
 # Выполнение завроса в базе данных
