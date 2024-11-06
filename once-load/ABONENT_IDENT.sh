@@ -3,8 +3,8 @@ current_date=$(date +%Y%m%d_%H%M)
 
 # Формирование MySQL-запроса с выводом в файл
 echo "SELECT 
-    u.login AS ABONENT_ID, 
-    99 AS REGION_ID, -- Статическое значение региона
+    u.login*1 AS ABONENT_ID, 
+    8 AS REGION_ID, -- Статическое значение региона
     5 AS IDENT_TYPE, -- Статическое значение идентификационного типа
     '' AS PHONE, -- Поле пустое
     '' AS INTERNAL_NUMBER, -- Поле пустое
@@ -31,8 +31,8 @@ echo "SELECT
     '' AS IPV6_MASK, -- Поле пустое
     nw.startip AS IP_RANGE_START, -- Поле пустое
     nw.endip AS IP_RANGE_END, -- Поле пустое
-    u.login AS INTERNAL_ID1, -- Используем ID пользователя как INTERNAL_ID1
-    u.login AS INTERNAL_ID2, -- Используем ID пользователя как INTERNAL_ID2
+    u.login*1 AS INTERNAL_ID1, -- Используем ID пользователя как INTERNAL_ID1
+    u.login*1 AS INTERNAL_ID2, -- Используем ID пользователя как INTERNAL_ID2
     DATE_FORMAT(cd.date, '%Y-%m-%d 00:00:00') AS BEGIN_TIME, -- Дата начала контракта
     '2049-12-12 23:59:00' AS END_TIME, -- Статическая дата окончания
     '' AS LINE_OBJECT, -- Поле пустое
