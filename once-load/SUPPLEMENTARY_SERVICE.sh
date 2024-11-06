@@ -28,7 +28,7 @@ WHERE name != '';
 " > /home/boss/COPM/query.sql
 
 # Выполнение завроса в базе данных
-mysql -u asdf -ptD44vTG59d big_nodeny < /home/boss/COPM/query.sql
+mysql -u root -pghbdtn5235441 stg < /home/boss/COPM/query.sql
 
 # Перенос файлов, подчищаем за собой
 rm -f /home/boss/COPM/query.sql
