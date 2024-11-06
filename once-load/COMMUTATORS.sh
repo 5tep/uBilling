@@ -45,7 +45,7 @@ SELECT
     '' AS APARTMENT,                        -- Пустое значение для квартиры
     s.location AS UNSTRUCT_INFO,                    -- Пустое значение для дополнительной информации
     '' AS SWITCH_SIGN,                       
-    99 AS REGION_ID                        -- Статическое значение для региона
+    8 AS REGION_ID                        -- Статическое значение для региона
 INTO OUTFILE '/home/boss/COPM/files/COMMUTATORS_$current_date.txt'
 FIELDS TERMINATED BY ';' 
 OPTIONALLY ENCLOSED BY ''
