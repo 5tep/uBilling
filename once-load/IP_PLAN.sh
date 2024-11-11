@@ -21,7 +21,10 @@ UNION ALL
 SELECT 
     n.desc AS DESCRIPTION, 
     0 AS IP_TYPE,
-    HEX(SUBSTRING_INDEX(n.desc, '/', -1)) AS IPV4,
+    CONCAT(LPAD(HEX(SUBSTRING_INDEX(SUBSTRING_INDEX(n.desc, '/', 1), '.', 1)*1), 2, 0),
+    LPAD(HEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(n.desc, '/', 1), '.', 2), '.', -1)*1), 2, 0),
+    LPAD(HEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(n.desc, '/', 1), '.', 3), '.', 3), '.', -1)*1), 2, 0),
+    LPAD(HEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(n.desc, '/', 1), '.', 4), '.', 4), '.', 4), '.', -1)*1), 2, 0)) AS IPV4,
     '' AS IPV6,
     0 AS IP_MASK_TYPE,                      
     'FFFFFF00' AS IPV4_MASK,                       
