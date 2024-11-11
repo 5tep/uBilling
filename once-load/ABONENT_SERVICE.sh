@@ -20,8 +20,8 @@ SELECT
     COALESCE(DATE_FORMAT(cd.date, '%Y-%m-%d 00:00:00'), '2000-01-01 00:00:00') AS BEGIN_TIME, 
     '2049-12-31 23:59:00' AS END_TIME, 
     nh.option AS PARAMETER, 
-    u.login AS INTERNAL_ID1, 
-    u.login AS INTERNAL_ID2
+    u.login*1 AS INTERNAL_ID1, 
+    u.login*1 AS INTERNAL_ID2
 INTO OUTFILE '/home/boss/COPM/files/ABONENT_SERVICE_$current_date.txt'
 FIELDS TERMINATED BY ';' 
 OPTIONALLY ENCLOSED BY '\"'
@@ -32,7 +32,7 @@ LEFT JOIN
     contracts cn ON cn.login = u.login
 LEFT JOIN 
     contractdates cd ON cd.contract = cn.contract
-WHERE u.ip = nh.ip AND s.netid = nh.netid;
+WHERE u.ip = nh.ip AND s.netid = nh.netid AND LENGTH(u.login) < 8;
 " > /home/boss/COPM/query.sql
 
 # Выполнение завроса в базе данных
