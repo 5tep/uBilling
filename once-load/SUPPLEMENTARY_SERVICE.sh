@@ -23,7 +23,7 @@ FIELDS TERMINATED BY ';'
 OPTIONALLY ENCLOSED BY ''
 LINES TERMINATED BY '\n'
 FROM 
-    servises s
+    services s
 WHERE s.desc != '';
 " > /home/boss/COPM/query.sql
 
