@@ -13,18 +13,18 @@ SELECT
 UNION ALL
 SELECT 
     id AS ID,
-    name AS MNEMONIC,
+    s.desc AS MNEMONIC,
     '2008-01-02 00:00:00' AS BEGIN_TIME,
     '2049-12-31 23:59:59' AS END_TIME,
-    name AS DESCRIPTION,
+    s.desc AS DESCRIPTION,
     8 AS REGION_ID
 INTO OUTFILE '/home/boss/COPM/files/SUPPLEMENTARY_SERVICE_$current_date.txt'
 FIELDS TERMINATED BY ';' 
 OPTIONALLY ENCLOSED BY ''
 LINES TERMINATED BY '\n'
 FROM 
-    tariffs
-WHERE name != '';
+    servises s
+WHERE s.desc != '';
 " > /home/boss/COPM/query.sql
 
 # Выполнение завроса в базе данных
