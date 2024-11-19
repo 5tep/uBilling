@@ -31,7 +31,7 @@ SELECT
     '2049-12-31 23:59:00' AS END_TIME,        -- Указанная дата окончания
     s.desc AS DESCRIPTION,                    -- Используем поле name для описания
     4 AS NETWORK_TYPE,                      
-    sm.modelname AS SWITCH_TYPE,                       
+    0 AS SWITCH_TYPE,                       
     0 AS ADDRESS_TYPE_ID,                   
     1 AS ADDRESS_TYPE,                      
     '' AS ZIP,                                -- Пустое значение для ZIP
@@ -52,7 +52,7 @@ OPTIONALLY ENCLOSED BY ''
 LINES TERMINATED BY '\n'
 FROM 
     switches s, switchmodels sm
-WHERE s.modelid = sm.id
+WHERE s.modelid = sm.id and s.location != ''
 ;" > /home/boss/COPM/query.sql
 
 # Выполнение завроса в базе данных
