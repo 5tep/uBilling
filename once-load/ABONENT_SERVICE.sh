@@ -24,7 +24,7 @@ SELECT
     u.login*1 AS INTERNAL_ID2
 INTO OUTFILE '/home/boss/COPM/files/ABONENT_SERVICE_$current_date.txt'
 FIELDS TERMINATED BY ';' 
-OPTIONALLY ENCLOSED BY '\"'
+OPTIONALLY ENCLOSED BY ''
 LINES TERMINATED BY '\n'
 FROM 
     nethosts nh, services s, users u
