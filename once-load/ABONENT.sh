@@ -50,7 +50,7 @@ LINES TERMINATED BY '\n'
 FROM 
     address adr, apt ap, build b, street s, city c, users u
 LEFT JOIN 
-    contracts cn ON cn.login = u.login
+    contracts cn ON cn.login = u.login and cn.contract != ''
 LEFT JOIN 
     contractdates cd ON cd.contract = cn.contract 
 LEFT JOIN 
