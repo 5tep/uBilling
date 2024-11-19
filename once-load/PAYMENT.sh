@@ -63,7 +63,7 @@ SELECT
     '' AS LATITUDE,  -- Пустое поле
     '' AS LONGITUDE,  -- Пустое поле
     '' AS PROJECTION_TYPE,  -- Пустое поле
-    '' AS CENTER_ID,  -- Пустое поле
+    1 AS CENTER_ID,  -- Пустое поле
     '' AS DONATED_PHONE_NUMBER,  -- Пустое поле
     '' AS DONATED_ACCOUNT,  -- Пустое поле
     '' AS DONATED_INTERNAL_ID1,  -- Пустое поле
@@ -73,10 +73,10 @@ SELECT
     '' AS PERSON_RECIEVED,  -- Пустое поле
     '' AS BANK_DIVISION_NAME,  -- Пустое поле
     '' AS BANK_CARD_ID,  -- Пустое поле
-    '' AS ADDRESS_TYPE_ID,  -- Пустое поле
-    '' AS ADDRESS_TYPE,  -- Пустое поле
+    0 AS ADDRESS_TYPE_ID,  -- Пустое поле
+    1 AS ADDRESS_TYPE,  -- Пустое поле
     '' AS ZIP,  -- Пустое поле
-    'Российская Федерация' AS COUNTRY,  -- Пример статического значения
+    '' AS COUNTRY,  -- Пример статического значения
     '' AS REGION,  -- Пустое поле
     '' AS ZONE,  -- Пустое поле
     '' AS CITY,  -- Пустое поле
@@ -98,7 +98,7 @@ WHERE p.login = u.login AND p.cashtypeid in (3);
 " > /home/boss/COPM/query.sql
 
 # Выполнение завроса в базе данных
-mysql -u asdf -ptD44vTG59d big_nodeny < /home/boss/COPM/query.sql
+mysql -u root -pghbdtn5235441 stg < /home/boss/COPM/query.sql
 
 # Перенос файлов, подчищаем за собой
 rm -f /home/boss/COPM/query.sql
