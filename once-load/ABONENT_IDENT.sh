@@ -33,13 +33,22 @@ SELECT
     '' AS RESERVED, -- Поле пустое
     '' AS ORIGINATOR_NAME, -- Поле пустое
     0 AS IP_TYPE, -- Поле пустое
-    u.ip AS IPV4, -- Преобразование IP-адреса из формата INT в строку
+    CONCAT(LPAD(HEX(SUBSTRING_INDEX(SUBSTRING_INDEX(u.ip, '/', 1), '.', 1)*1), 2, 0),
+    LPAD(HEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(u.ip, '/', 1), '.', 2), '.', -1)*1), 2, 0),
+    LPAD(HEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(u.ip, '/', 1), '.', 3), '.', 3), '.', -1)*1), 2, 0),
+    LPAD(HEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(u.ip, '/', 1), '.', 4), '.', 4), '.', 4), '.', -1)*1), 2, 0)) AS IPV4, -- Преобразование IP-адреса из формата INT в строку
     '' AS IPV6, -- Поле пустое
     '' AS IP_MASK_TYPE, -- Поле пустое
     '255.255.0.0' AS IPV4_MASK, -- Поле пустое
     '' AS IPV6_MASK, -- Поле пустое
-    nw.startip AS IP_RANGE_START, -- Поле пустое
-    nw.endip AS IP_RANGE_END, -- Поле пустое
+    CONCAT(LPAD(HEX(SUBSTRING_INDEX(SUBSTRING_INDEX(nw.startip, '/', 1), '.', 1)*1), 2, 0),
+    LPAD(HEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(nw.startip, '/', 1), '.', 2), '.', -1)*1), 2, 0),
+    LPAD(HEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(nw.startip, '/', 1), '.', 3), '.', 3), '.', -1)*1), 2, 0),
+    LPAD(HEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(nw.startip, '/', 1), '.', 4), '.', 4), '.', 4), '.', -1)*1), 2, 0)) AS IP_RANGE_START, -- Поле пустое
+    CONCAT(LPAD(HEX(SUBSTRING_INDEX(SUBSTRING_INDEX(nw.endip, '/', 1), '.', 1)*1), 2, 0),
+    LPAD(HEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(nw.endip, '/', 1), '.', 2), '.', -1)*1), 2, 0),
+    LPAD(HEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(nw.endip, '/', 1), '.', 3), '.', 3), '.', -1)*1), 2, 0),
+    LPAD(HEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(nw.endip, '/', 1), '.', 4), '.', 4), '.', 4), '.', -1)*1), 2, 0)) AS IP_RANGE_END, -- Поле пустое
     u.login*1 AS INTERNAL_ID1, -- Используем ID пользователя как INTERNAL_ID1
     u.login*1 AS INTERNAL_ID2, -- Используем ID пользователя как INTERNAL_ID2
     COALESCE(DATE_FORMAT(cd.date, '%Y-%m-%d 00:00:00'), '2000-01-01 00:00:00') AS BEGIN_TIME, -- Дата начала контракта
