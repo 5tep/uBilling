@@ -84,7 +84,7 @@ SELECT
     '' AS BUILDING,  -- Пустое поле
     '' AS BUILD_SECT,  -- Пустое поле
     '' AS APARTMENT,  -- Пустое поле
-    '' AS UNSTRUCT_INFO,  -- Пустое поле
+    'Российская Федерация' AS UNSTRUCT_INFO,  -- Пустое поле
     8 AS REGION_ID  -- Пример статического значения
 INTO OUTFILE '/home/boss/COPM/files/PAYMENT_$current_date.txt'
 FIELDS TERMINATED BY ';' 
