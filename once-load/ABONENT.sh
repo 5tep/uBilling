@@ -32,7 +32,7 @@ SELECT DISTINCT
         ELSE SUBSTRING_INDEX(pd.passportnum, ' ', 1)
     END AS IDENT_CARD_SERIAL, -- Поле серия паспорта
     CASE 
-        WHEN pd.passportnum is NULL THEN '0000'
+        WHEN pd.passportnum is NULL THEN '000000'
         ELSE SUBSTRING_INDEX(pd.passportnum, ' ', -1)
     END AS IDENT_CARD_NUMBER, -- Поле номер паспорта
     CASE 
