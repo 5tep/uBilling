@@ -26,20 +26,14 @@ SELECT DISTINCT
     n.realname AS UNSTRUCT_NAME, -- Используем FIO как неструктурированное имя
     COALESCE(pd.birthdate, '') AS BIRTH_DATE, -- Поле Дата рождения
     1 AS IDENT_CARD_TYPE_ID, -- Поле ИД типа документа
-    0 AS IDENT_CARD_TYPE, -- Поле Тип документа
+    1 AS IDENT_CARD_TYPE, -- Поле Тип документа
+    '' AS IDENT_CARD_SERIAL, -- Поле серия паспорта
+    '' AS IDENT_CARD_NUMBER, -- Поле номер паспорта
+    '' AS IDENT_CARD_DESCRIPTION, -- Поле Кем, когда выдан
     CASE 
-        WHEN pd.passportnum is NULL THEN '0000'
-        ELSE SUBSTRING_INDEX(pd.passportnum, ' ', 1)
-    END AS IDENT_CARD_SERIAL, -- Поле серия паспорта
-    CASE 
-        WHEN pd.passportnum is NULL THEN '000000'
-        ELSE SUBSTRING_INDEX(pd.passportnum, ' ', -1)
-    END AS IDENT_CARD_NUMBER, -- Поле номер паспорта
-    CASE 
-        WHEN pd.passportwho is NULL THEN '-нет данных-'
-        ELSE SUBSTRING_INDEX(pd.passportnum, ' ', 1)
-    END AS IDENT_CARD_DESCRIPTION, -- Поле Кем, когда выдан
-    '' AS IDENT_CARD_UNSTRUCT, -- Документ
+        WHEN pd.passportnum is NULL THEN '-нет данных-'
+        ELSE CONCAT(pd.passportnum, ' ', pd.passportwho)
+    END AS IDENT_CARD_UNSTRUCT, -- Документ
     '' AS BANK, -- Статическое значение банка
     '' AS BANK_ACCOUNT, -- Статическое значение банковского счета
     '' AS FULL_NAME, -- Используем FIO как полное имя
