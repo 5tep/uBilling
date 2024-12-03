@@ -46,7 +46,7 @@ SELECT DISTINCT
     4 AS NETWORK_TYPE, -- Тип сети
     u.login*1 AS INTERNAL_ID1, -- Поле пустое
     u.login*1 AS INTERNAL_ID2 -- Поле пустое
-INTO OUTFILE '/home/boss/COPM/files/ABONENT_$current_date.txt'
+INTO OUTFILE '/home/boss/COPM/files/ABONENT_$1.txt'
 FIELDS TERMINATED BY ';' 
 OPTIONALLY ENCLOSED BY ''
 LINES TERMINATED BY '\n'
